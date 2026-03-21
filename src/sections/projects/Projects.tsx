@@ -3,12 +3,13 @@ import { Container } from "../../layout/Container";
 import { sectionVariants } from "../../systems/motion/animations";
 import { SectionTitle } from "../../shared/components/SectionTitle";
 import { projects } from "../../shared/data/projects";
-import { Icon } from "../../shared/components/Icon";
 import { ProjectCard } from "./ProjectCard";
+import { ProjectMedia } from "./ProjectMedia";
 
 export function Projects() {
   const bigProject = projects.find((project) => project.size === "big");
   const smallProjects = projects.filter((project) => project.size === "small");
+  const projectHoverTransition = { type: "tween", ease: "easeOut", duration: 0.16 } as const;
 
   return (
     <motion.section
@@ -32,15 +33,16 @@ export function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               whileHover={{ y: -8 }}
-              transition={{ duration: 0.5 }}
-              className="rounded-2xl border border-white/10 bg-black/50 backdrop-blur-sm overflow-hidden group hover:border-white/20 transition-all hover:shadow-2xl"
+              whileTap={{ y: -4 }}
+              transition={{ duration: 0.5, y: projectHoverTransition }}
+              className="rounded-2xl border border-white/10 bg-black/50 backdrop-blur-sm overflow-hidden group transform-gpu will-change-transform hover:border-white/20 hover:shadow-2xl transition-[border-color,box-shadow] duration-200"
             >
               <div className="flex flex-col md:flex-row">
-                <div className="h-48 md:h-auto md:w-2/5 bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 relative overflow-hidden flex items-center justify-center">
-                  <div className="text-white/30 group-hover:text-white/50 transition-all">
-                    <Icon type={bigProject.icon} className="w-20 h-20 sm:w-24 sm:h-24" />
-                  </div>
-                </div>
+                <ProjectMedia
+                  project={bigProject}
+                  className="h-48 md:h-auto md:w-2/5 bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 relative overflow-hidden flex items-center justify-center"
+                  iconClassName="w-20 h-20 sm:w-24 sm:h-24"
+                />
                 <div className="p-6 sm:p-8 md:w-3/5">
                   <h3 className="text-xl sm:text-2xl md:text-3xl font-bold">{bigProject.title}</h3>
                   <div className="flex flex-wrap gap-2 mt-3 mb-4">
@@ -53,25 +55,10 @@ export function Projects() {
                       </span>
                     ))}
                   </div>
-                  <p className="text-neutral-400 mt-3 text-sm sm:text-base leading-relaxed">
+                  <p className="text-neutral-400 mt-3 text-sm sm:text-base leading-relaxed [text-align:justify]">
                     {bigProject.desc}
                   </p>
-                  <div className="flex flex-wrap gap-3 sm:gap-4 mt-6">
-                    <motion.a
-                      href="#"
-                      whileHover={{ x: 5 }}
-                      className="inline-block text-sm text-white/70 hover:text-white transition-colors"
-                    >
-                      Ver demo →
-                    </motion.a>
-                    <motion.a
-                      href="#"
-                      whileHover={{ x: 5 }}
-                      className="inline-block text-sm text-white/70 hover:text-white transition-colors"
-                    >
-                      Solicitar similar →
-                    </motion.a>
-                  </div>
+                  
                 </div>
               </div>
             </motion.div>

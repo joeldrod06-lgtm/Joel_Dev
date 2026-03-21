@@ -4,28 +4,36 @@ export type ProjectItem = {
   tech: string;
   size: "big" | "small";
   icon: "building" | "shopping" | "globe";
+  image?: string;
+  imageAlt?: string;
 };
 
 export const projects: ProjectItem[] = [
   {
-    title: "Sistema de Gestión Empresarial",
-    desc: "Solución completa para negocios locales: inventario, ventas, facturación y reportes. Panel administrativo intuitivo, dashboard en tiempo real y acceso multi-usuario. Ideal para pymes que quieren digitalizar sus operaciones.",
-    tech: "React, Node.js, MongoDB, Tailwind",
+    title: "Sistema Integral Vv2",
+    desc: "Sistema web tipo ERP desarrollado para la UPQ, enfocado en centralizar y optimizar la gestión de procesos administrativos y académicos mediante módulos interconectados. Permite administrar usuarios, servicios, pagos y reportes en tiempo real a través de una interfaz moderna, rápida y responsive, con una arquitectura escalable basada en APIs orientada a la automatización y eficiencia operativa.",
+    tech: "React, Node.js, Ajax, Tailwind, Postgress, Springboot",
     size: "big",
     icon: "building",
+    image: "/projects/sistema-gestion.jpg",
+    imageAlt: "Vista previa del sistema de gestion empresarial",
   },
   {
-    title: "E-commerce Moderno",
-    desc: "Tienda online completa con carrito de compras, pasarela de pagos integrada, gestión de productos y sistema de reseñas. Solución lista para que negocios locales vendan en línea.",
-    tech: "React, Stripe, Node.js, MongoDB",
+    title: "INFRAMEX - Plataforma Web con Panel Administrativo",
+    desc: "Pagina web para empresa de materiales de construccion donde los usuarios pueden consultar productos, informacion de la empresa y contactar facilmente via WhatsApp o llamada. Incluye panel administrativo para gestionar productos, descripciones, imagenes y contenido del sitio en tiempo real.",
+    tech: "Next.js, Node.js, MongoDB, Tailwind",
     size: "small",
-    icon: "shopping",
+    icon: "building",
+    image: "/projects/inframex.png",
+    imageAlt: "Vista previa de la plataforma web de INFRAMEX",
   },
   {
-    title: "Landing Page Corporativa",
-    desc: "Sitios web profesionales con diseño moderno, optimizados para conversión y SEO. Perfecto para negocios que necesitan presencia digital impactante y funcional.",
-    tech: "React, Tailwind, Framer Motion",
+    title: "Landing Page - Gimnasio",
+    desc: "Pagina web informativa para gimnasio donde los usuarios pueden consultar planes, precios, servicios e informacion general. Incluye seccion de contacto para facilitar la comunicacion y captar nuevos clientes.",
+    tech: "React, Tailwind, Next.js, Material UI",
     size: "small",
     icon: "globe",
+    image: "/projects/gym.png",
+    imageAlt: "Vista previa de landing page de gimnasio",
   },
 ];

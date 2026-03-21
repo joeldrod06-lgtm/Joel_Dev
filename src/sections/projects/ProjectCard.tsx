@@ -1,6 +1,12 @@
 import { motion } from "framer-motion";
-import { Icon } from "../../shared/components/Icon";
 import type { ProjectItem } from "../../shared/data/projects";
+import { ProjectMedia } from "./ProjectMedia";
+
+const projectHoverTransition = {
+  type: "tween",
+  ease: "easeOut",
+  duration: 0.16,
+} as const;
 
 type ProjectCardProps = {
   project: ProjectItem;
@@ -13,15 +19,16 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
+      transition={{ delay: index * 0.1, duration: 0.5, y: projectHoverTransition }}
       whileHover={{ y: -8 }}
-      className="rounded-2xl border border-white/10 bg-black/50 backdrop-blur-sm overflow-hidden group hover:border-white/20 transition-all"
+      whileTap={{ y: -4 }}
+      className="rounded-2xl border border-white/10 bg-black/50 backdrop-blur-sm overflow-hidden group transform-gpu will-change-transform hover:border-white/20 hover:shadow-2xl transition-[border-color,box-shadow] duration-200"
     >
-      <div className="h-40 sm:h-48 bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 relative overflow-hidden flex items-center justify-center">
-        <div className="text-white/30 group-hover:text-white/50 transition-all">
-          <Icon type={project.icon} className="w-12 h-12 sm:w-16 sm:h-16" />
-        </div>
-      </div>
+      <ProjectMedia
+        project={project}
+        className="h-40 sm:h-48 bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 relative overflow-hidden flex items-center justify-center"
+        iconClassName="w-12 h-12 sm:w-16 sm:h-16"
+      />
       <div className="p-5 sm:p-6">
         <h3 className="text-lg sm:text-xl font-medium">{project.title}</h3>
         <div className="flex flex-wrap gap-2 mt-2 mb-3">
@@ -31,14 +38,10 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
             </span>
           ))}
         </div>
-        <p className="text-neutral-400 mt-2 text-xs sm:text-sm leading-relaxed">{project.desc}</p>
-        <motion.a
-          href="#"
-          whileHover={{ x: 5 }}
-          className="inline-block mt-4 text-sm text-white/70 hover:text-white transition-colors"
-        >
-          Ver proyecto →
-        </motion.a>
+        <p className="text-neutral-400 mt-2 text-xs sm:text-sm leading-relaxed [text-align:justify]">
+          {project.desc}
+        </p>
+       
       </div>
     </motion.div>
   );
