@@ -59,7 +59,7 @@ export function Contact() {
                 rel="noreferrer"
                 className="text-neutral-300 hover:text-white text-sm transition"
               >
-                4481519373
+                +52 4481519373
               </a>
             </div>
             <div>

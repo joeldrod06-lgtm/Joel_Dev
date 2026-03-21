@@ -21,7 +21,7 @@ export const projects: ProjectItem[] = [
   {
     title: "INFRAMEX - Plataforma Web con Panel Administrativo",
     desc: "Pagina web para empresa de materiales de construccion donde los usuarios pueden consultar productos, informacion de la empresa y contactar facilmente via WhatsApp o llamada. Incluye panel administrativo para gestionar productos, descripciones, imagenes y contenido del sitio en tiempo real.",
-    tech: "Next.js, Node.js, MongoDB, Tailwind",
+    tech: "Next.js, Node.js, Postgress, Tailwind",
     size: "small",
     icon: "building",
     image: "/projects/inframex.png",
