@@ -15,7 +15,7 @@ export const projects: ProjectItem[] = [
     tech: "React, Node.js, Ajax, Tailwind, Postgress, Springboot",
     size: "big",
     icon: "building",
-    image: "/projects/sistema-gestion.jpg",
+    image: "/projects/sii.png",
     imageAlt: "Vista previa del sistema de gestion empresarial",
   },
   {
