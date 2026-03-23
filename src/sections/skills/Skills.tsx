@@ -25,12 +25,40 @@ export function Skills() {
           {skills.map((skill, index) => (
             <motion.div
               key={skill.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    delay: index * 0.05,
+                    duration: 0.28,
+                    ease: "easeOut",
+                  },
+                },
+                hover: {
+                  y: -3,
+                  scale: 1.008,
+                  borderColor: "rgba(255, 255, 255, 0.22)",
+                  transition: {
+                    duration: 0.12,
+                    ease: "easeOut",
+                  },
+                },
+                tap: {
+                  scale: 0.997,
+                  transition: {
+                    duration: 0.08,
+                    ease: "easeOut",
+                  },
+                },
+              }}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="p-4 sm:p-6 rounded-2xl bg-black/50 backdrop-blur-sm border border-white/10 text-center hover:border-white/30 transition-all"
+              whileHover="hover"
+              whileTap="tap"
+              className="p-4 sm:p-6 rounded-2xl bg-black/50 backdrop-blur-sm border border-white/10 text-center transform-gpu will-change-transform"
             >
               <span className="text-base sm:text-lg font-medium block">{skill.name}</span>
               <span className="text-xs text-neutral-500 mt-2 block">{skill.level}</span>

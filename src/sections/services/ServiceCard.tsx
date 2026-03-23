@@ -10,12 +10,32 @@ type ServiceCardProps = {
 export function ServiceCard({ service, index }: ServiceCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      variants={{
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: {
+            delay: index * 0.1,
+            duration: 0.28,
+            ease: "easeOut",
+          },
+        },
+        hover: {
+          y: -3,
+          scale: 1.008,
+          borderColor: "rgba(255, 255, 255, 0.2)",
+          transition: {
+            duration: 0.12,
+            ease: "easeOut",
+          },
+        },
+      }}
+      initial="hidden"
+      whileInView="visible"
       viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
-      whileHover={{ y: -8 }}
-      className="p-6 sm:p-8 rounded-2xl bg-black/50 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all"
+      whileHover="hover"
+      className="p-6 sm:p-8 rounded-2xl bg-black/50 backdrop-blur-sm border border-white/10 transform-gpu will-change-transform"
     >
       <div className="text-white/80 mb-4">
         <Icon type={service.icon} className="w-10 h-10 sm:w-12 sm:h-12" />
