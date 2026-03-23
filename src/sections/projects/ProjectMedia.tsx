@@ -26,6 +26,8 @@ export function ProjectMedia({ project, className, iconClassName }: ProjectMedia
             alt={project.imageAlt ?? project.title}
             className="h-full w-full object-cover"
             loading="lazy"
+            decoding="async"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
             onError={() => setImageFailed(true)}
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10" />

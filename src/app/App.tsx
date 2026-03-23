@@ -20,7 +20,7 @@ export default function App() {
         <Contact />
       </main>
 
-      <footer className="py-8 sm:py-10 text-center text-neutral-500 border-t border-white/10 relative z-10 bg-black/30 backdrop-blur-sm">
+      <footer className="py-8 sm:py-10 text-center text-neutral-500 border-t border-white/10 relative z-10 bg-black/30 backdrop-blur-0 sm:backdrop-blur-sm">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-xs sm:text-sm">

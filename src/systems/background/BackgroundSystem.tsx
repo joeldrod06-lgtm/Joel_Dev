@@ -7,6 +7,42 @@ import { useIsMobile } from "../../shared/hooks/useIsMobile";
 
 export function BackgroundSystem() {
   const isMobile = useIsMobile();
+
+  if (isMobile) {
+    return <MobileBackgroundSystem />;
+  }
+
+  return <DesktopBackgroundSystem />;
+}
+
+function MobileBackgroundSystem() {
+  return (
+    <>
+      <div className="fixed inset-0 bg-gradient-to-br from-[var(--color-page)] via-[var(--color-page)] to-[#111111]" />
+      <div className="fixed inset-0 pointer-events-none opacity-10">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)
+            `,
+            backgroundSize: "72px 72px",
+          }}
+        />
+      </div>
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-12 left-[-96px] h-[320px] w-[320px] rounded-full bg-gradient-to-r from-amber-500/10 via-orange-500/6 to-transparent blur-[72px]" />
+        <div className="absolute bottom-12 right-[-96px] h-[320px] w-[320px] rounded-full bg-gradient-to-l from-cyan-500/10 via-emerald-500/6 to-transparent blur-[72px]" />
+      </div>
+      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.32)_100%)]" />
+      <div className="fixed inset-x-0 top-0 h-24 pointer-events-none bg-gradient-to-b from-[var(--color-page)] to-transparent z-40" />
+      <div className="fixed inset-x-0 bottom-0 h-24 pointer-events-none bg-gradient-to-t from-[var(--color-page)] to-transparent z-40" />
+    </>
+  );
+}
+
+function DesktopBackgroundSystem() {
   const { gridOpacity, gradientOpacity } = useScrollProgress();
   const { smoothMouseX, smoothMouseY } = useMouseParallax();
 
@@ -14,10 +50,7 @@ export function BackgroundSystem() {
     <>
       <div className="fixed inset-0 bg-gradient-to-br from-[var(--color-page)] via-[var(--color-page)] to-[#111111]" />
 
-      <motion.div
-        style={{ opacity: isMobile ? 0.12 : gridOpacity }}
-        className="fixed inset-0 pointer-events-none"
-      >
+      <motion.div style={{ opacity: gridOpacity }} className="fixed inset-0 pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
@@ -42,9 +75,9 @@ export function BackgroundSystem() {
         smoothMouseX={smoothMouseX}
         smoothMouseY={smoothMouseY}
         opacity={gradientOpacity}
-        isMobile={isMobile}
+        isMobile={false}
       />
-      {isMobile ? null : <Particles />}
+      <Particles />
 
       <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]" />
       <div className="fixed inset-x-0 top-0 h-32 pointer-events-none bg-gradient-to-b from-[var(--color-page)] to-transparent z-40" />

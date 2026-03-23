@@ -15,7 +15,7 @@ export const projects: ProjectItem[] = [
     tech: "React, Node.js, Ajax, Tailwind, Postgress, Springboot",
     size: "big",
     icon: "building",
-    image: "/projects/sii.png",
+    image: "/projects/sii.jpg",
     imageAlt: "Vista previa del sistema de gestion empresarial",
   },
   {
@@ -24,7 +24,7 @@ export const projects: ProjectItem[] = [
     tech: "Next.js, Node.js, Postgress, Tailwind",
     size: "small",
     icon: "building",
-    image: "/projects/inframex.png",
+    image: "/projects/inframex.jpg",
     imageAlt: "Vista previa de la plataforma web de INFRAMEX",
   },
   {
@@ -33,7 +33,7 @@ export const projects: ProjectItem[] = [
     tech: "React, Tailwind, Next.js, Material UI",
     size: "small",
     icon: "globe",
-    image: "/projects/gym.png",
+    image: "/projects/gym.jpg",
     imageAlt: "Vista previa de landing page de gimnasio",
   },
 ];
