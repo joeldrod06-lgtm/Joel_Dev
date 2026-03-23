@@ -1,17 +1,20 @@
 import { motion } from "framer-motion";
 import { Container } from "../../layout/Container";
-import { sectionVariants } from "../../systems/motion/animations";
+import { getSectionVariants } from "../../systems/motion/animations";
 import { SectionTitle } from "../../shared/components/SectionTitle";
 import { skills } from "../../shared/data/skills";
+import { useIsMobile } from "../../shared/hooks/useIsMobile";
 
 export function Skills() {
+  const isMobile = useIsMobile();
+
   return (
     <motion.section
       id="skills"
-      className="py-20 sm:py-32 scroll-mt-24 bg-black/30 backdrop-blur-sm relative z-10"
-      variants={sectionVariants}
-      initial="hidden"
-      whileInView="visible"
+      className="py-20 sm:py-32 scroll-mt-24 bg-black/30 backdrop-blur-0 sm:backdrop-blur-sm relative z-10"
+      variants={getSectionVariants(isMobile)}
+      initial={isMobile ? false : "hidden"}
+      whileInView={isMobile ? undefined : "visible"}
       viewport={{ once: true, amount: 0.2 }}
     >
       <Container>
@@ -31,34 +34,34 @@ export function Skills() {
                   opacity: 1,
                   y: 0,
                   transition: {
-                    delay: index * 0.05,
-                    duration: 0.28,
+                    delay: isMobile ? Math.min(index * 0.02, 0.08) : index * 0.05,
+                    duration: isMobile ? 0.2 : 0.28,
                     ease: "easeOut",
                   },
                 },
                 hover: {
-                  y: -3,
-                  scale: 1.008,
+                  y: isMobile ? -1 : -3,
+                  scale: isMobile ? 1.002 : 1.008,
                   borderColor: "rgba(255, 255, 255, 0.22)",
                   transition: {
-                    duration: 0.12,
+                    duration: isMobile ? 0.08 : 0.12,
                     ease: "easeOut",
                   },
                 },
                 tap: {
-                  scale: 0.997,
+                  scale: isMobile ? 0.999 : 0.997,
                   transition: {
                     duration: 0.08,
                     ease: "easeOut",
                   },
                 },
               }}
-              initial="hidden"
-              whileInView="visible"
+              initial={isMobile ? false : "hidden"}
+              whileInView={isMobile ? undefined : "visible"}
               viewport={{ once: true }}
-              whileHover="hover"
-              whileTap="tap"
-              className="p-4 sm:p-6 rounded-2xl bg-black/50 backdrop-blur-sm border border-white/10 text-center transform-gpu will-change-transform"
+              whileHover={isMobile ? undefined : "hover"}
+              whileTap={isMobile ? undefined : "tap"}
+              className="p-4 sm:p-6 rounded-2xl bg-black/50 backdrop-blur-0 sm:backdrop-blur-sm border border-white/10 text-center transform-gpu will-change-transform"
             >
               <span className="text-base sm:text-lg font-medium block">{skill.name}</span>
               <span className="text-xs text-neutral-500 mt-2 block">{skill.level}</span>

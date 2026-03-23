@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
 import { Container } from "../../layout/Container";
-import { sectionVariants } from "../../systems/motion/animations";
+import { getSectionVariants } from "../../systems/motion/animations";
 import { Icon } from "../../shared/components/Icon";
+import { useIsMobile } from "../../shared/hooks/useIsMobile";
 
 export function Contact() {
+  const isMobile = useIsMobile();
   const whatsappMessage =
     "Hola Joel, encontré tu sitio web y me interesaron tus servicios. Me gustaría recibir más información.";
   const whatsappHref = `https://wa.me/524481519373?text=${encodeURIComponent(whatsappMessage)}`;
@@ -11,18 +13,18 @@ export function Contact() {
   return (
     <motion.section
       id="contact"
-      className="py-20 sm:py-32 scroll-mt-24 bg-black/30 backdrop-blur-sm relative z-10"
-      variants={sectionVariants}
-      initial="hidden"
-      whileInView="visible"
+      className="py-20 sm:py-32 scroll-mt-24 bg-black/30 backdrop-blur-0 sm:backdrop-blur-sm relative z-10"
+      variants={getSectionVariants(isMobile)}
+      initial={isMobile ? false : "hidden"}
+      whileInView={isMobile ? undefined : "visible"}
       viewport={{ once: true, amount: 0.2 }}
     >
       <Container>
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={isMobile ? false : { opacity: 0, y: 40 }}
+          whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={isMobile ? undefined : { duration: 0.6, ease: "easeOut" }}
           className="max-w-3xl mx-auto text-center"
         >
           <h2 className="text-3xl sm:text-4xl font-semibold">¿Transformamos tu negocio?</h2>

@@ -3,8 +3,10 @@ import { GradientBlobs } from "./GradientBlobs";
 import { Particles } from "./Particles";
 import { useScrollProgress } from "../scroll/useScrollProgress";
 import { useMouseParallax } from "../../shared/hooks/useMouseParallax";
+import { useIsMobile } from "../../shared/hooks/useIsMobile";
 
 export function BackgroundSystem() {
+  const isMobile = useIsMobile();
   const { gridOpacity, gradientOpacity } = useScrollProgress();
   const { smoothMouseX, smoothMouseY } = useMouseParallax();
 
@@ -12,7 +14,10 @@ export function BackgroundSystem() {
     <>
       <div className="fixed inset-0 bg-gradient-to-br from-[var(--color-page)] via-[var(--color-page)] to-[#111111]" />
 
-      <motion.div style={{ opacity: gridOpacity }} className="fixed inset-0 pointer-events-none">
+      <motion.div
+        style={{ opacity: isMobile ? 0.12 : gridOpacity }}
+        className="fixed inset-0 pointer-events-none"
+      >
         <div
           className="absolute inset-0"
           style={{
@@ -37,8 +42,9 @@ export function BackgroundSystem() {
         smoothMouseX={smoothMouseX}
         smoothMouseY={smoothMouseY}
         opacity={gradientOpacity}
+        isMobile={isMobile}
       />
-      <Particles />
+      {isMobile ? null : <Particles />}
 
       <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]" />
       <div className="fixed inset-x-0 top-0 h-32 pointer-events-none bg-gradient-to-b from-[var(--color-page)] to-transparent z-40" />

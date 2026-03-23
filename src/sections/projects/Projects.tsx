@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
 import { Container } from "../../layout/Container";
-import { sectionVariants } from "../../systems/motion/animations";
+import { getSectionVariants } from "../../systems/motion/animations";
 import { SectionTitle } from "../../shared/components/SectionTitle";
 import { projects } from "../../shared/data/projects";
+import { useIsMobile } from "../../shared/hooks/useIsMobile";
 import { ProjectCard } from "./ProjectCard";
 import { ProjectMedia } from "./ProjectMedia";
 
 export function Projects() {
+  const isMobile = useIsMobile();
   const bigProject = projects.find((project) => project.size === "big");
   const smallProjects = projects.filter((project) => project.size === "small");
   const projectHoverTransition = { type: "tween", ease: "easeOut", duration: 0.16 } as const;
@@ -15,9 +17,9 @@ export function Projects() {
     <motion.section
       id="projects"
       className="py-20 sm:py-32 scroll-mt-24 relative z-10"
-      variants={sectionVariants}
-      initial="hidden"
-      whileInView="visible"
+      variants={getSectionVariants(isMobile)}
+      initial={isMobile ? false : "hidden"}
+      whileInView={isMobile ? undefined : "visible"}
       viewport={{ once: true, amount: 0.2 }}
     >
       <Container>
@@ -29,13 +31,13 @@ export function Projects() {
         <div className="space-y-6 sm:space-y-8">
           {bigProject ? (
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={isMobile ? false : { opacity: 0, y: 50 }}
+              whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              whileHover={{ y: -8 }}
-              whileTap={{ y: -4 }}
-              transition={{ duration: 0.5, y: projectHoverTransition }}
-              className="rounded-2xl border border-white/10 bg-black/50 backdrop-blur-sm overflow-hidden group transform-gpu will-change-transform hover:border-white/20 hover:shadow-2xl transition-[border-color,box-shadow] duration-200"
+              whileHover={isMobile ? undefined : { y: -8 }}
+              whileTap={isMobile ? undefined : { y: -4 }}
+              transition={isMobile ? undefined : { duration: 0.5, y: projectHoverTransition }}
+              className="rounded-2xl border border-white/10 bg-black/50 backdrop-blur-0 sm:backdrop-blur-sm overflow-hidden group transform-gpu will-change-transform hover:border-white/20 hover:shadow-2xl transition-[border-color,box-shadow] duration-200"
             >
               <div className="flex flex-col md:flex-row">
                 <ProjectMedia

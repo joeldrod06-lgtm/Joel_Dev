@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Icon } from "../../shared/components/Icon";
 import type { ServiceItem } from "../../shared/data/services";
+import { useIsMobile } from "../../shared/hooks/useIsMobile";
 
 type ServiceCardProps = {
   service: ServiceItem;
@@ -8,6 +9,8 @@ type ServiceCardProps = {
 };
 
 export function ServiceCard({ service, index }: ServiceCardProps) {
+  const isMobile = useIsMobile();
+
   return (
     <motion.div
       variants={{
@@ -16,26 +19,26 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
           opacity: 1,
           y: 0,
           transition: {
-            delay: index * 0.1,
-            duration: 0.28,
+            delay: isMobile ? Math.min(index * 0.03, 0.09) : index * 0.1,
+            duration: isMobile ? 0.22 : 0.28,
             ease: "easeOut",
           },
         },
         hover: {
-          y: -3,
-          scale: 1.008,
+          y: isMobile ? -1 : -3,
+          scale: isMobile ? 1.002 : 1.008,
           borderColor: "rgba(255, 255, 255, 0.2)",
           transition: {
-            duration: 0.12,
+            duration: isMobile ? 0.08 : 0.12,
             ease: "easeOut",
           },
         },
       }}
-      initial="hidden"
-      whileInView="visible"
+      initial={isMobile ? false : "hidden"}
+      whileInView={isMobile ? undefined : "visible"}
       viewport={{ once: true }}
-      whileHover="hover"
-      className="p-6 sm:p-8 rounded-2xl bg-black/50 backdrop-blur-sm border border-white/10 transform-gpu will-change-transform"
+      whileHover={isMobile ? undefined : "hover"}
+      className="p-6 sm:p-8 rounded-2xl bg-black/50 backdrop-blur-0 sm:backdrop-blur-sm border border-white/10 transform-gpu will-change-transform"
     >
       <div className="text-white/80 mb-4">
         <Icon type={service.icon} className="w-10 h-10 sm:w-12 sm:h-12" />

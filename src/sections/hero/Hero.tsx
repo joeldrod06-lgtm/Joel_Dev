@@ -1,16 +1,19 @@
 import { motion } from "framer-motion";
-import { heroTransition } from "../../systems/motion/animations";
+import { getHeroTransition } from "../../systems/motion/animations";
+import { useIsMobile } from "../../shared/hooks/useIsMobile";
 
 export function Hero() {
+  const isMobile = useIsMobile();
+
   return (
     <section
       id="hero"
       className="min-h-screen scroll-mt-24 flex items-center justify-center text-center px-4 sm:px-6 relative z-10"
     >
       <motion.div
-        initial={{ opacity: 0, y: 60 }}
+        initial={{ opacity: 0, y: isMobile ? 24 : 60 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={heroTransition}
+        transition={getHeroTransition(isMobile)}
         className="relative w-full"
       >
         <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight px-4">

@@ -7,4 +7,11 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  server: {
+    host: true,
+    strictPort: true,
+    allowedHosts: [
+      "uncontemporaneous-tierra-semiorientally.ngrok-free.dev"
+    ]
+  }
 });

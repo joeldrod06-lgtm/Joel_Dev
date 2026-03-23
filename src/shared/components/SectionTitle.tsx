@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 type SectionTitleProps = {
   eyebrow?: string;
@@ -7,11 +8,14 @@ type SectionTitleProps = {
 };
 
 export function SectionTitle({ eyebrow, title, description }: SectionTitleProps) {
+  const isMobile = useIsMobile();
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={isMobile ? false : { opacity: 0, y: 30 }}
+      whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true }}
+      transition={isMobile ? undefined : { duration: 0.4, ease: "easeOut" }}
       className="text-center mb-12 sm:mb-16"
     >
       {eyebrow ? (

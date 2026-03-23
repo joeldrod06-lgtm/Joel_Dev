@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import type { ProjectItem } from "../../shared/data/projects";
+import { useIsMobile } from "../../shared/hooks/useIsMobile";
 import { ProjectMedia } from "./ProjectMedia";
 
 const projectHoverTransition = {
@@ -14,15 +15,25 @@ type ProjectCardProps = {
 };
 
 export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
+  const isMobile = useIsMobile();
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={isMobile ? false : { opacity: 0, y: 50 }}
+      whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.5, y: projectHoverTransition }}
-      whileHover={{ y: -8 }}
-      whileTap={{ y: -4 }}
-      className="rounded-2xl border border-white/10 bg-black/50 backdrop-blur-sm overflow-hidden group transform-gpu will-change-transform hover:border-white/20 hover:shadow-2xl transition-[border-color,box-shadow] duration-200"
+      transition={
+        isMobile
+          ? undefined
+          : {
+              delay: index * 0.1,
+              duration: 0.5,
+              y: projectHoverTransition,
+            }
+      }
+      whileHover={isMobile ? undefined : { y: -8 }}
+      whileTap={isMobile ? undefined : { y: -4 }}
+      className="rounded-2xl border border-white/10 bg-black/50 backdrop-blur-0 sm:backdrop-blur-sm overflow-hidden group transform-gpu will-change-transform hover:border-white/20 hover:shadow-2xl transition-[border-color,box-shadow] duration-200"
     >
       <ProjectMedia
         project={project}
